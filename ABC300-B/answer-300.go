@@ -27,6 +27,7 @@ func readString() string {
 // メイン処理を実行する関数
 func run(stdin io.Reader, out io.Writer) {
   sc = bufio.NewScanner(stdin)
+
   sc.Split(bufio.ScanWords)
 
   h, w := readInt(), readInt()
