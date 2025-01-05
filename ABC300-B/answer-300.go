@@ -26,28 +26,33 @@ func readString() string {
 
 // メイン処理を実行する関数
 func run(stdin io.Reader, out io.Writer) {
-  sc = bufio.NewScanner(stdin) // 標準入力をスキャナーにセット
-  sc.Split(bufio.ScanWords)    // スキャナーを単語単位で分割
+  sc = bufio.NewScanner(stdin)
+  sc.Split(bufio.ScanWords)
 
   h, w := readInt(), readInt()
 
-  as := make([]string, h) // グリッドAを保持するスライス
+  // グリッドAを保持するスライス
+  as := make([]string, h)
   for i := range as {
     as[i] = readString()
   }
 
-  bs := make([]string, h) // グリッドBを保持するスライス
+  // グリッドBを保持するスライス
+  bs := make([]string, h)
   for i := range bs {
     bs[i] = readString()
   }
-
-  for i := 0; i < w; i++ { // 列方向にi回シフトするループ
-    for j := 0; j < h; j++ { // 行方向にj回シフトするループ
+  // 列方向にi回シフトするループ
+  for i := 0; i < w; i++ {
+	// 行方向にj回シフトするループ
+    for j := 0; j < h; j++ {
       flg := true
-      for bi, b := range bs { // グリッドBの各行をループ
+	  // グリッドBの各行をループ
+      for bi, b := range bs {
         idx := (bi + j) % h
         a := as[idx][i:] + as[idx][:i]
-        if b != a { // グリッドAとグリッドBが一致しない場合
+		// グリッドAとグリッドBが一致しない場合
+        if b != a {
           flg = false
           break
         }
